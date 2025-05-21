@@ -818,8 +818,10 @@ class SchemaYujoyFluid:
         for fname in dct_easy_en:
             yaml_header = get_dict_yaml_header(dct_easy_en[fname][0], self.version, dct_easy_en[fname][1], dct_easy_en[fname][2])
             dir_out = os.path.join(os.path.split(self.dir_out)[0], "dicts_easy_en")
+            if not os.path.exists(dir_out):
+                os.makedirs(dir_out)
             file_out = os.path.join(dir_out, dct_easy_en[fname][0]+".dict.yaml")
-            with open(file_out, 'w', encoding='utf-8') as fw:
+            with open(file_out, 'w+', encoding='utf-8') as fw:
                 fw.write(yaml_header)
                 for d in list_easy_en:
                     if d["fname"] == fname:
@@ -831,18 +833,18 @@ if __name__ == '__main__':
     start = time.perf_counter()
     # myschema = SchemaYujoyFluid(
     #     "material_yujoy",
-    #     "yujoy.full.dict_v3.6.0.yaml",
+    #     "yujoy.full.dict_v3.8.0.yaml",
     #     "schema_yujoy_fluid/dicts_yujoy_fluid",
     #     "卿云",
-    #     "2.4"
+    #     "2.5"
     # )
     # myschema.build("", True)
     myschema = SchemaYujoyFluid(
         "material_yujoy",
-        "yujoy.full.dict_v3.6.0.yaml",
+        "yujoy.full.dict_v3.8.0.yaml",
         "schema_yujoy_fluid/dicts_yujoy_fluid_a",
         "卿云",
-        "2.4"
+        "2.5"
     )
     myschema.build("A", True)  # a版
     myschema.generate_other_dicts()
